@@ -12,7 +12,7 @@ commands:
       - run:
           name: Destroy environments
           when: on_fail
-          command: |            
+          command: |
             #aws --version
             echo "DESTROY STACKS"
             aws s3 rm "s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7}" --recursive
@@ -25,7 +25,7 @@ commands:
   revert-migrations:
     description: Revert the last migration if successfully run in the current workflow.
     parameters:
-      # Add parameter here     
+      # Add parameter here
     steps:
       - run:
           name: Revert migrations
@@ -39,7 +39,7 @@ commands:
             echo 'the key: ' migration_${CIRCLE_WORKFLOW_ID}
             echo "migration value is: " ${SUCCESS}
 
-            if(( $SUCCESS==1 )); 
+            if(( $SUCCESS==1 ));
             then
               cd ~/project/backend
               npm install
@@ -152,7 +152,7 @@ jobs:
           name: scan back-end dependencies
           command: |
             cd backend
-            npm install            
+            npm install
             npm audit fix --audit-level=critical --force
             cat package.json | grep standard
 
@@ -334,7 +334,7 @@ jobs:
             BACKENDDNS=$(aws ec2 describe-instances --query 'Reservations[*].Instances[*].PublicDnsName' --filters "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7}" --output text)
 
             cd ~/project/frontend
-            touch .env
+            #touch .env
             export API_URL="http://${BACKENDIP}:3030"
             echo "${API_URL}" >> .env
             cat ~/project/frontend/.env
@@ -426,7 +426,7 @@ jobs:
             echo "BACKENDIP: ${BACKENDIP}"
             echo "BACKENDNS: ${BACKENDDNS}"
             echo "BACKENDIP: ${API_URL}"
-            
+
             pwd
             ls -la
             cat ~/project/backend/.env
@@ -448,7 +448,7 @@ jobs:
               echo "Fail!!"
               return 1
             fi
-      # Here's where you will add some code to rollback on failure  
+      # Here's where you will add some code to rollback on failure
       #- destroy-environment
       #- revert-migrations
 
@@ -510,14 +510,14 @@ jobs:
 #          workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
 #      - revert-migrations
 
-      # Here's where you will add some code to rollback on failure  
+      # Here's where you will add some code to rollback on failure
       #- destroy-environment
       #- revert-migrations
 
   cleanup:
     docker:
       # Docker image here
-      - image: amazon/aws-cli 
+      - image: amazon/aws-cli
     steps:
       - checkout
 
@@ -539,7 +539,7 @@ jobs:
               aws cloudformation delete-stack --stack-name udapeople-backend-$originalWorkflowID
             else
               echo "No old workflow exists"
-            fi 
+            fi
       #- destroy-environment:
       #    workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
       #- revert-migrations
@@ -548,7 +548,7 @@ jobs:
 #      - run:
 #          name: Get old stack workflow id and remove old stacks
 #          command: |
-  
+
 #            export OLDWORKFLOWID=$(aws cloudformation list-exports --query "Exports[?Name=='WorkflowID'].Value" --no-paginate --output text)
 #            echo "oldworkflowID: " ${OLDWORKFLOWID}
 
