@@ -86,7 +86,7 @@ jobs:
              npm install -qq package.json
              npm install -qq
              #npm i -g standard-version
-             #npm audit fix #--audit-level=critical --force
+             npm audit fix --audit-level=critical --force
              npm run build -qq
              npm view standard-version version
 
