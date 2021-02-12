@@ -84,8 +84,9 @@ jobs:
              cd backend
              npm install -qq
 
-             npm audit fix --audit-level=critical --force
+             #npm audit fix --audit-level=critical --force
              npm run build -qq
+             echo "Standard-version"
              npm view standard-version version
 
       - save_cache:
