@@ -335,10 +335,10 @@ jobs:
 
             cd ~/project/frontend
             #touch .env
-            #export API_URL="http://${BACKENDIP}:3030"
-            #echo "${API_URL}" >> .env
-            export API_URL="http://${BACKENDNS}:3030"
+            export API_URL="http://${BACKENDIP}:3030"
             echo "${API_URL}" >> .env
+            export API_DNS="http://${BACKENDNS}:3030"
+            echo "${API_DNS}" >> .env
             cat ~/project/frontend/.env
 
             #npm install webpack-dev-server -g
