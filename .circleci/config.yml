@@ -337,14 +337,9 @@ jobs:
             #touch .env
             export API_URL="http://${BACKENDIP}:3030"
             echo "${API_URL}" >> .env
-            export API_DNS="http://${BACKENDNS}:3030"
-            echo "${API_DNS}" >> .env
             cat ~/project/frontend/.env
 
-            #npm install webpack-dev-server -g
             npm install
-            #npm update
-            #npm audit fix --audit-level=critical --force
             npm run build
             cat ~/project/frontend/.env
 
